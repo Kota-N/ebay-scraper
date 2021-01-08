@@ -69,7 +69,7 @@ def scrape_products():
 def ebay_scraper():
     while True:
         hour = 60 * 60
-        scrape_interval = 300
+        scrape_interval = 60
 
         insert_date()
         connection_error = scrape_products()
