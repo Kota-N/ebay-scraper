@@ -68,25 +68,26 @@ def scrape_products():
 
 def ebay_scraper():
     while True:
+        start_time = time.time()
+        
         hour = 60 * 60
         scrape_interval = 60
 
         insert_date()
         connection_error = scrape_products()
-        error_time_offest = 0
 
         while connection_error:
             delay_time = hour * 2
-            error_time_offest += delay_time
             time.sleep(delay_time)
 
             connection_error = scrape_products()
                     
-
+        scraped_time = time.time() - start_time
         print('Scraped: ' + str(datetime.now()))
+        print('It took: ' + round(scraped_time))
 
-        if scrape_interval - error_time_offest > 0:
-            time.sleep(scrape_interval - error_time_offest)
+        if scrape_interval - round(scraped_time) > 0:
+            time.sleep(scrape_interval - round(scraped_time))
 
 ebay_scraper()
 
